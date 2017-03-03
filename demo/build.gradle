@@ -1,0 +1,14 @@
+apply plugin: 'war' 
+apply plugin : 'jetty'
+webAppDirName  = 'webfiles'
+war {
+	from 'static'
+}
+jettyRun{
+	httpPort = 9090
+	contextPath = 'myth'
+}
+
+task wrapper(type: Wrapper){
+      gradleVersion = '3.4'
+ }

@@ -1,0 +1,42 @@
+version = new ProjectVersion(0,1)
+class ProjectVersion{
+	Integer major
+	Integer minor
+	Boolean release
+	
+	ProjectVersion (Integer major ,Integer minor){
+		this.major = major
+		this.minor = minor
+	}
+	ProjectVersion (Integer major ,Integer minor,Boolean release){
+		this(major,minor)
+		this.release = release
+	}
+	@Override
+	String toString(){
+		"$major.$minor${release ? '-RELEASE' : '-SNAPSHOT'}"
+	}
+}
+ext.versionFile = file('version.properties')
+task loadVersion{
+	project.version = readVersion()
+}
+ProjectVersion readVersion(){
+	logger.quiet 'Reading the Version Config File'
+	if(!versionFile.exists()){
+		throw new GradleException("Version File does not exists : $versionFile.canonicalPath")
+	}
+	Properties versionProps = new Properties()
+	versionFile.withInputStream {
+		stream -> versionProps.load(stream)
+	}
+	new ProjectVersion(versionProps.major.toInteger(),versionProps.minor.toInteger(),versionProps.release.toBoolean())
+	
+}
+task printVersion {
+   	doLast {
+   		println "Version : $version"
+   		logger.quiet "Logger Version : $version"
+   	}
+}
+
