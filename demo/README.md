@@ -1,4 +1,4 @@
-## ¹ØÓÚÈÎÎñµÄ´ÖÂÊÈëÃÅ
+## å…³äºtaskçš„å…¥é—¨
 ```
 	task startSession<<{
 		chant()
@@ -16,9 +16,9 @@
 	task groupTherapy(dependsOn:yayGradle2)
 ```
 
-
-## ²âÊÔ¹¹½¨Ò»¸ö»ù±¾µÄJavaÏîÄ¿£¬±àÒëµÃµ½jar
-ÊÖ¶¯´´½¨µÄÄ¿Â¼½á¹¹ÊÇ src.main.java.com.myth.test
+****
+### æµ‹è¯•æ„å»ºä¸€ä¸ªåŸºæœ¬çš„Javaé¡¹ç›®ï¼Œç¼–è¯‘å¾—åˆ°jar
+æ‰‹åŠ¨åˆ›å»ºçš„ç›®å½•ç»“æ„æ˜¯ src.main.java.com.myth.test
 ```
 	apply plugin: 'java'
 	version = 0.1
@@ -46,9 +46,9 @@
 	}
 ```
 
-## ¹¹½¨webÏîÄ¿
-- ÄÚÖÃjettyµÄwarÏîÄ¿£¬Ã»ÓĞmain·½·¨£¬Ò²¾Í²»ÄÜÖ±½ÓjavaÔËĞĞ
-- gradle jettyRun ÔËĞĞ Ö»Òª×îºóÒ»ĞĞÊÇ jettyRun£º Ã»ÓĞ±¨´í£¬¾Í¿ÉÒÔ´ò¿ªä¯ÀÀÆ÷·ÃÎÊÁË
+### æ„å»ºwebé¡¹ç›®
+- å†…ç½®jettyçš„waré¡¹ç›®ï¼Œæ²¡æœ‰mainæ–¹æ³•ï¼Œä¹Ÿå°±ä¸èƒ½ç›´æ¥javaè¿è¡Œ
+- gradle jettyRun è¿è¡Œ åªè¦æœ€åä¸€è¡Œæ˜¯ jettyRunï¼š æ²¡æœ‰æŠ¥é”™ï¼Œå°±å¯ä»¥æ‰“å¼€æµè§ˆå™¨è®¿é—®äº†
 
 ```
 	apply plugin: 'war' 
@@ -62,3 +62,10 @@
 		contextPath = 'myth'
 	}
 ```
+
+***
+
+
+
+
+

@@ -1,4 +1,5 @@
-// Use Groovy POGO to  Mapper Properties 
+version = new ProjectVersion(0,1)
+// POGO Class
 class ProjectVersion{
 	Integer major
 	Integer minor
@@ -31,8 +32,8 @@ ProjectVersion readVersion(){
 		stream -> versionProps.load(stream)
 	}
 	new ProjectVersion(versionProps.major.toInteger(),versionProps.minor.toInteger(),versionProps.release.toBoolean())
-	
 }
+// display Version
 task printVersion {
    	doLast {
    		println "Version : $version"
@@ -41,3 +42,28 @@ task printVersion {
 }
 
 // gradle -b tasksL.gradle -q printVersion
+//
+// make project release by update version.properties
+//
+task makeReleaseVersion(group:'versioning',description:'Make project a release version')<<{
+	version.release = true
+	logger.quiet 'ant update version'
+	ant.propertyfile(file:versionFile){
+		entry(key:'release',type:'string',operation:'=',value:'true')
+	}
+	logger.quiet 'Update Success !'
+}
+
+task IOReleaseVersion(group:'versioning',description:'Makes project a release version'){
+	inputs.property('release',version.release)
+	outputs.file versionFile
+	
+	//also  use ant style code 
+	doLast{
+		logger.quiet 'IO update version' 
+		version.release = true
+		ant.propertyfile(file:versionFile){
+			entry(key:'release',type:'string',operation:'=',value:'true')
+		}
+	}
+}
