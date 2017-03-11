@@ -1,0 +1,42 @@
+version = new ProjectVersion(0,1,true)
+class ReleaseVersionTask extends DefaultTask{
+    @Input Boolean release
+    @OutputFile File destFile
+
+    ReleaseVersionTask(){
+        group = 'versioning'
+        description = 'Make Project a release version'
+
+    }
+    @TaskAction
+    void start (){
+        project.version.release = true;
+        ant.propertyfile(file:destFile){
+            entry(key:'release',type:'string',operation:'=',value:'true')
+        }
+        println "$project.version"
+    }
+}
+class ProjectVersion{
+    Integer major
+	Integer minor
+    Boolean release
+    ProjectVersion (Integer major ,Integer minor){
+		this.major = major
+		this.minor = minor
+	}
+    ProjectVersion (Integer major ,Integer minor,Boolean release){
+		this(major,minor)
+		this.release = release
+	}
+    @Override
+    String toString(){
+        "$major.$minor${release?'-RELEASE':'-SNAPSHOT'}"
+    }
+}
+task makeReleaseVersion(type:ReleaseVersionTask){
+    release = 'true'
+    destFile = file('version.properties')
+    
+}
+
